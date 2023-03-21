@@ -81,7 +81,7 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
     }, [db]);
 
     return (
-        <div className="root">
+        <div className="shell_container">
             <div ref={termContainer} className="term_container" />
         </div>
     );

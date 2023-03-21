@@ -2,10 +2,32 @@ html,
 body {
   height: 100%;
   overflow: hidden;
-}
-body {
+
   font-family: 'Graphik Web';
-  margin: 0px;
+}
+
+.unfolded-root {
+  margin: -48px;
+}
+.unfolded-local-map {
+  width: calc(100% + 48px);
+}
+#kepler-gl__map { /* id selector */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.kepler-gl {
+  margin-left: 0;
+  position: absolute;
+  width: calc(100% + 48px)
+
+}
+.side-nav {
+  visibility: hidden
 }
 .sidemenu {
   position: absolute;
