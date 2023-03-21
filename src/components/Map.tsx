@@ -4,6 +4,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useState, useRef, useEffect } from 'react';
 import { createMap } from '@unfolded/map-sdk';
+import type { MapApi, DatasetCreationProps } from '@unfolded/map-sdk/';
 import { Form } from './Form';
 
 import '../static/map.css';
@@ -32,18 +33,19 @@ const UnfoldedMap = ({ setMap }) => {
 };
 
 export const Map = () => {
-    const [map, setMap] = useState<any>(null);
+    const [map, setMap] = useState<MapApi>();
     const [layers, setLayers] = useState<any[]>([]);
     const [layerResult, setLayerResult] = useState<any>('');
 
     useEffect(() => {
-        const dataset = {
+        const dataset: DatasetCreationProps = {
             id: 'test-dataset-01',
             label: 'Cities',
             color: [194, 29, 29],
             data: locationData,
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         map && map.addDataset(dataset);
     }, [map]);
 
@@ -58,7 +60,7 @@ export const Map = () => {
         const layer = layers[index];
         const layerId = layer.id;
         const isVisible = !layer.isVisible;
-        layers[index] = map.updateLayer(layerId, { isVisible });
+        layers[index] = map!.updateLayer(layerId, { isVisible });
         const newLayers = [...layers];
         setLayers(newLayers);
     };
@@ -106,7 +108,7 @@ export const Map = () => {
 
     // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
     const _setViewState = (config: { longitude: number; latitude: number; zoom: number }) => {
-        map.setView(config);
+        map!.setView(config);
     };
 
     return (
@@ -118,7 +120,7 @@ export const Map = () => {
                 ) : (
                     <div id="content">
                         <h2>GeoDuck</h2>
-                        <Form />
+                        <Form map={map} />
                         <span className="subtitle">
                             Built by{' '}
                             <a href="https://www.geospatialml.com/" target="_blank" rel="noreferrer">
