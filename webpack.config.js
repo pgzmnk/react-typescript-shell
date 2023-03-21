@@ -23,10 +23,6 @@ export default {
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.mjs', '.jsx', '.css', '.wasm'],
     },
-    devServer: {
-        static: './build/',
-        hot: true,
-    },
     module: {
         rules: [
             {
