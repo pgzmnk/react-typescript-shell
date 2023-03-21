@@ -28,5 +28,5 @@ html {
     padding: 0;
     margin: 0;
     background-color: #ffffff;
-    overflow-y: scroll; /* full page scroll */
+    overflow-y: clip /* scroll; /* full page scroll */
 }

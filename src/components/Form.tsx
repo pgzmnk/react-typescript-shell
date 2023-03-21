@@ -23,7 +23,6 @@ export const Form: React.FC = () => {
 
     return (
         <div>
-            <h1>Data functions:</h1>
             <button type="button" className="btn btn-secondary" onClick={handleClick}>
                 Load
             </button>
