@@ -13,6 +13,7 @@ import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckd
 import logo from './static/logo.svg';
 import { Form } from './components/Form';
 import { Shell } from './components/Shell';
+import { Map } from './components/Map';
 
 const DUCKDB_BUNDLES: duckdb.DuckDBBundles = {
     mvp: {
@@ -48,13 +49,16 @@ export const App: React.FC<SomeComponentProps> = (propr: SomeComponentProps) => 
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>Click count: {count}</p>
-                <button onClick={() => setCount(count + 1)}>Click me</button>
+                <button type="button" onClick={() => setCount(count + 1)}>
+                    Click me
+                </button>
             </header>
 
             {/* Components within these nodes can share WASM DuckDB instance */}
             <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
                 <DuckDBProvider>
                     <DuckDBConnectionProvider>
+                        <Map />
                         <Shell padding={[16, 0, 0, 20]} backgroundColor="#333" />
                         <Form />
                     </DuckDBConnectionProvider>

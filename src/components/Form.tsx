@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import * as rd from '@duckdb/react-duckdb';
 import arrow from 'apache-arrow';
@@ -25,10 +24,10 @@ export const Form: React.FC = () => {
     return (
         <div>
             <h1>Data functions:</h1>
-            <button className="btn btn-secondary" onClick={handleClick}>
+            <button type="button" className="btn btn-secondary" onClick={handleClick}>
                 Load
             </button>
-            <button className="btn-btn-secondary" onClick={handleClickRender}>
+            <button type="button" className="btn-btn-secondary" onClick={handleClickRender}>
                 Render
             </button>
         </div>

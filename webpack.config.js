@@ -27,7 +27,7 @@ export default {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                options: { allowTsInNodeModules: true } // also introduced this to mitigate errors
+                options: { allowTsInNodeModules: true }, // also introduced this to mitigate errors
                 // exclude: /node_modules/, // commenting this vanishes the "unexpected token" error in node_modules
             },
             {
@@ -42,7 +42,7 @@ export default {
                 type: 'asset/resource',
             },
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     'style-loader',
                     {
