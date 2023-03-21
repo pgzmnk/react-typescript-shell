@@ -1,6 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
-import webpack from 'webpack';
 import path from 'path';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
@@ -12,7 +11,6 @@ export default {
     entry: {
         // app: ["./src/app.tsx"],
         app: ['./src/index.tsx'],
-        hot: 'webpack/hot/dev-server.js',
     },
     output: {
         path: path.resolve(__dirname, './build/'),
@@ -72,7 +70,6 @@ export default {
             template: './templates/index.html',
             // filename: "./index.html",
         }),
-        new webpack.HotModuleReplacementPlugin(),
     ],
     experiments: {
         asyncWebAssembly: true,
