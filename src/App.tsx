@@ -11,7 +11,7 @@ import duckdb_wasm_coi from '@duckdb/duckdb-wasm/dist/duckdb-coi.wasm';
 import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckdb/react-duckdb';
 
 import logo from './static/logo.svg';
-import { Map } from './components/Map';
+import { Form } from './components/Form';
 import { Shell } from './components/Shell';
 
 const DUCKDB_BUNDLES: duckdb.DuckDBBundles = {
@@ -56,7 +56,7 @@ export const App: React.FC<SomeComponentProps> = (propr: SomeComponentProps) => 
                 <DuckDBProvider>
                     <DuckDBConnectionProvider>
                         <Shell padding={[16, 0, 0, 20]} backgroundColor="#333" />
-                        <Map />
+                        <Form />
                     </DuckDBConnectionProvider>
                 </DuckDBProvider>
             </DuckDBPlatform>
