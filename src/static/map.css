@@ -13,13 +13,14 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   border: 1px solid #b3b3b3;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 10px;
+  overflow: scroll; /* hidden */
   max-height: 80%;
   width: 360px;
   left: 60px;
   top: 0;
   margin: 100px 28px;
+  padding: 10px 10px;
   background: white;
   opacity: 1;
   .header {
@@ -72,7 +73,7 @@ body {
         letter-spacing: 2px;
         padding: 8px 16px;
         border: none;
-        border-radius: 8px;
+        border-radius: 15px;
         background-clip: padding-box;
         transition: color 0.2s linear, background-color 0.2s linear;
         background-color: #3498db80;
@@ -153,7 +154,7 @@ body {
     margin: 0 auto;
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
-    border-radius: 50%;
+    border-radius: 10%;
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;

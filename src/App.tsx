@@ -46,7 +46,7 @@ export const App: React.FC<SomeComponentProps> = () => {
                 <DuckDBProvider>
                     <DuckDBConnectionProvider>
                         <Map />
-                        <Shell padding={[16, 0, 0, 20]} backgroundColor="#333" />
+                        <Shell />
                     </DuckDBConnectionProvider>
                 </DuckDBProvider>
             </DuckDBPlatform>

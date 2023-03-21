@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createMap } from '@unfolded/map-sdk';
 import { Form } from './Form';
 
-import '../static/Map.scss';
+import '../static/map.css';
 
 const locationData = require('../data/cities.json');
 
