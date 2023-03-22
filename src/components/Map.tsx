@@ -45,8 +45,9 @@ export const Map = () => {
             data: locationData,
         };
 
+        // disable pre-loading datasets for now
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        map && map.addDataset(dataset);
+        // map && map.addDataset(dataset);
     }, [map]);
 
     const loadLayers = () => {

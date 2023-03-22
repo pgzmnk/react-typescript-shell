@@ -31,11 +31,13 @@ body {
 .side-nav {
   visibility: hidden
 }
+
+
 .sidemenu {
   position: absolute;
-  z-index: 1;
+  right: -30;
+  z-index: 0;
   display: grid;
-  grid-template-rows: auto 1fr auto;
   border: 1px solid #b3b3b3;
   border-radius: 10px;
   overflow: scroll; /* hidden */
@@ -43,7 +45,7 @@ body {
   width: 360px;
   left: 60px;
   top: 0;
-  margin: 100px 28px;
+  margin: 50px 500px;
   padding: 10px 10px;
   background: white;
   opacity: 1;
@@ -56,6 +58,9 @@ body {
     }
   }
   #content {
+
+
+
     overflow-y: auto;
     padding: 0px 20px 20px 20px;
     h2 {

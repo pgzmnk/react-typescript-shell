@@ -34,22 +34,32 @@ const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
 
 type SomeComponentProps = Record<string, string>;
 
-export const App: React.FC<SomeComponentProps> = () => {
-    React.useEffect(() => {
-        document.title = 'Quack';
-    });
+// export const App: React.FC<SomeComponentProps> = () => {
+export class App extends React.Component<SomeComponentProps> {
+    constructor(props: SomeComponentProps) {
+        super(props);
+        this.state = {
+            prompt: 'SELECT * FROM city LIMIT 10;',
+        };
+    }
 
-    return (
-        <div className="App">
-            {/* Components within these nodes can share WASM DuckDB instance */}
-            <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
-                <DuckDBProvider>
-                    <DuckDBConnectionProvider>
-                        <Map />
-                        <Shell />
-                    </DuckDBConnectionProvider>
-                </DuckDBProvider>
-            </DuckDBPlatform>
-        </div>
-    );
-};
+    //     React.useEffect(() => {
+    //     document.title = 'Quack';
+    // });
+
+    render() {
+        return (
+            <div className="App">
+                {/* Components within these nodes can share WASM DuckDB instance */}
+                <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
+                    <DuckDBProvider>
+                        <DuckDBConnectionProvider>
+                            <Map />
+                            <Shell />
+                        </DuckDBConnectionProvider>
+                    </DuckDBProvider>
+                </DuckDBPlatform>
+            </div>
+        );
+    }
+}
