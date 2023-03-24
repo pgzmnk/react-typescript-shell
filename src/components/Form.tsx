@@ -28,38 +28,6 @@ export const Form = () => {
         await c.close();
     };
 
-    const handleClickRender = async () => {
-        const c = await db!.value!.connect();
-        const result = await c.query<{ v: arrow.Int }>('SELECT * FROM from_map LIMIT 4;');
-        console.log(result.toString());
-        await c.close();
-    };
-
-    const handleClickAddDataset = async () => {
-        const c = await db!.value!.connect();
-        const result = await c.query(`SELECT * FROM city;`);
-        await c.close();
-
-        const addDatasetOptions: AddDatasetOptions = {
-            autoCreateLayers: true,
-            centerMap: true,
-        };
-        const datasetCreationProps: DatasetCreationProps = {
-            id: 'test-dataset-03',
-            label: 'Citiescapes',
-            color: [194, 29, 29],
-            data: JSON.parse(result.toString()),
-        };
-
-        // create or replace dataset
-        try {
-            // map.addDataset(datasetCreationProps, addDatasetOptions);
-        } catch (e) {
-            console.log(e);
-            // map.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
-        }
-    };
-
     const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
         console.log('handleChange...');
         setPrompt(event.target.value);
@@ -72,13 +40,16 @@ export const Form = () => {
             const result = await c.query(event.target.value);
             await c.close();
 
+            // regex to find table name in sql from statement
+            const tableName = event.target.value.match(/\b(FROM|JOIN)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
+
             const addDatasetOptions: AddDatasetOptions = {
                 autoCreateLayers: true,
                 centerMap: true,
             };
             const datasetCreationProps: DatasetCreationProps = {
-                id: 'sql-dataset-01',
-                label: 'user-defined',
+                id: tableName,
+                label: tableName,
                 color: [194, 29, 29],
                 data: JSON.parse(result.toString()),
             };
@@ -97,8 +68,6 @@ export const Form = () => {
         <Stack>
             <HStack>
                 <Button onClick={handleClick}>Load</Button>
-                <Button onClick={handleClickRender}>Render</Button>
-                <Button onClick={handleClickAddDataset}>Add Dataset</Button>
             </HStack>
             <Input
                 variant="outline"
