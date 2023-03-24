@@ -34,12 +34,26 @@ export const Form = () => {
         setPrompt(event.target.value);
     };
 
+    async function runQuery(query: string) {
+        console.log('runQuery...', query);
+        let result: string = '';
+        try {
+            const c = await db!.value!.connect();
+            const response = await c.query(query);
+            result = response.toString();
+            console.log('result: ', result);
+        } catch (error) {
+            console.log('error: ', error);
+        }
+        return result;
+    }
+
     const handlePromptSubmission = async (event: any) => {
         // when user presses enter on the input field
         if (event.keyCode === 13) {
             const command = event.target.value.split(' ')[0].toLowerCase() as string;
 
-            // switch for event.target.value values
+            // extract prompt fields
             const tableName = event.target.value.match(/\b(FROM|JOIN)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
             const datasetName = event.target.value.match(/\b(DATASET)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
 
@@ -50,17 +64,15 @@ export const Form = () => {
 
             switch (command) {
                 case 'create' || 'update':
-                    const c = await db!.value!.connect();
-
                     const queryString = `SELECT ${event.target.value.split(' AS SELECT')[1].trim()}`;
-                    const result = await c.query(queryString);
-                    await c.close();
+
+                    const result = await runQuery(queryString);
 
                     const datasetCreationProps: DatasetCreationProps = {
                         id: datasetName,
                         label: datasetName,
                         color: [194, 29, 29],
-                        data: JSON.parse(result.toString()),
+                        data: JSON.parse(result),
                     };
 
                     // create or replace dataset
