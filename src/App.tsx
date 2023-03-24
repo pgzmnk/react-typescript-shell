@@ -23,7 +23,6 @@ export const App: React.FC<SomeComponentProps> = () => {
     return (
         <ChakraProvider>
             <div className="App">
-                {/* Components within these nodes can share WASM DuckDB instance */}
                 <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
                     <DuckDBProvider>
                         <DuckDBConnectionProvider>
@@ -31,13 +30,6 @@ export const App: React.FC<SomeComponentProps> = () => {
                                 <div>test</div>
                                 <Map />
                                 <Shell />
-                                {/* <PromptContext.Provider value={promptValue}>
-                            <Map />
-                            <Inference />
-                            <Shell />
-                            <PromptDisplay />
-                            <PromptInput />
-                        </PromptContext.Provider> */}
                             </PromptContext.Provider>
                         </DuckDBConnectionProvider>
                     </DuckDBProvider>
