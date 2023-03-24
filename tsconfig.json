@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "outDir": "./build/ts/",
-        "target": "es5",
+        "target": "es6",
         "jsx": "react-jsx",
         "module": "es2020",
         "moduleResolution": "node",
