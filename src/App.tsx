@@ -1,6 +1,7 @@
 import React from 'react';
 import './static/App.css';
 import 'xterm/css/xterm.css';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import * as duckdb from '@duckdb/duckdb-wasm';
 import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckdb/react-duckdb';
@@ -20,26 +21,28 @@ export const App: React.FC<SomeComponentProps> = () => {
     const promptValue = React.useMemo(() => ({ prompt, setPrompt }), [prompt]);
 
     return (
-        <div className="App">
-            {/* Components within these nodes can share WASM DuckDB instance */}
-            <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
-                <DuckDBProvider>
-                    <DuckDBConnectionProvider>
-                        <PromptContext.Provider value={promptValue}>
-                            <div>test</div>
-                            <Map />
-                            <Shell />
-                            {/* <PromptContext.Provider value={promptValue}>
+        <ChakraProvider>
+            <div className="App">
+                {/* Components within these nodes can share WASM DuckDB instance */}
+                <DuckDBPlatform logger={logger} bundles={DUCKDB_BUNDLES}>
+                    <DuckDBProvider>
+                        <DuckDBConnectionProvider>
+                            <PromptContext.Provider value={promptValue}>
+                                <div>test</div>
+                                <Map />
+                                <Shell />
+                                {/* <PromptContext.Provider value={promptValue}>
                             <Map />
                             <Inference />
                             <Shell />
                             <PromptDisplay />
                             <PromptInput />
                         </PromptContext.Provider> */}
-                        </PromptContext.Provider>
-                    </DuckDBConnectionProvider>
-                </DuckDBProvider>
-            </DuckDBPlatform>
-        </div>
+                            </PromptContext.Provider>
+                        </DuckDBConnectionProvider>
+                    </DuckDBProvider>
+                </DuckDBPlatform>
+            </div>
+        </ChakraProvider>
     );
 };

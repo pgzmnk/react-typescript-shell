@@ -10,9 +10,13 @@
         "fix-js": "eslint-auto-fix"
     },
     "dependencies": {
+        "@chakra-ui/icons": "^2.0.17",
+        "@chakra-ui/react": "^2.5.3",
         "@duckdb/duckdb-wasm": "^1.13.1-dev230.0",
         "@duckdb/duckdb-wasm-shell": "^1.13.1-dev230.0",
         "@duckdb/react-duckdb": "^1.24.0",
+        "@emotion/react": "^11.10.6",
+        "@emotion/styled": "^11.10.6",
         "@types/node": "^16.18.16",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.11",
@@ -23,6 +27,7 @@
         "eslint-config-airbnb-typescript": "^17.0.0",
         "eslint-config-prettier": "^8.8.0",
         "fontfaceobserver": "^2.3.0",
+        "framer-motion": "^10.9.1",
         "immutable": "^4.2.4",
         "openai": "^3.2.1",
         "prettier": "^2.8.5",
