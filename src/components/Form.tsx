@@ -36,30 +36,51 @@ export const Form = () => {
     const handlePromptSubmission = async (event: any) => {
         // when user presses enter on the input field
         if (event.keyCode === 13) {
-            const c = await db!.value!.connect();
-            const result = await c.query(event.target.value);
-            await c.close();
+            const command = event.target.value.split(' ')[0].toLowerCase() as string;
 
-            // regex to find table name in sql from statement
+            console.log('command!!', command);
+
+            // switch for event.target.value values
             const tableName = event.target.value.match(/\b(FROM|JOIN)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
+            const datasetName = event.target.value.match(/\b(DATASET)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
 
             const addDatasetOptions: AddDatasetOptions = {
                 autoCreateLayers: true,
                 centerMap: true,
             };
-            const datasetCreationProps: DatasetCreationProps = {
-                id: tableName,
-                label: tableName,
-                color: [194, 29, 29],
-                data: JSON.parse(result.toString()),
-            };
 
-            // create or replace dataset
-            try {
-                map?.addDataset(datasetCreationProps, addDatasetOptions);
-            } catch (e) {
-                console.log(e);
-                map?.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
+            switch (command) {
+                case 'create':
+                    const c = await db!.value!.connect();
+                    const result = await c.query(event.target.value);
+                    await c.close();
+
+                    // eslint-disable-next-line no-case-declarations
+                    const datasetCreationProps: DatasetCreationProps = {
+                        id: datasetName,
+                        label: datasetName,
+                        color: [194, 29, 29],
+                        data: JSON.parse(result.toString()),
+                    };
+
+                    // create or replace dataset
+                    try {
+                        map?.addDataset(datasetCreationProps, addDatasetOptions);
+                    } catch (e) {
+                        console.log(e);
+                        map?.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
+                    }
+
+                    break;
+
+                case 'delete':
+                    map?.removeDataset(datasetName);
+                    break;
+
+                case 'prompt':
+                    break;
+                default:
+                    break;
             }
         }
     };
