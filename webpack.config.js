@@ -1,12 +1,15 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import Dotenv from 'dotenv-webpack';
+import webpack from 'webpack';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
     target: 'web',
+    // externalsPresets: { node: true },
     mode: 'production',
     entry: {
         // app: ["./src/app.tsx"],
@@ -65,6 +68,10 @@ export default {
         new HtmlWebpackPlugin({
             template: './templates/index.html',
             // filename: "./index.html",
+        }),
+        new webpack.ProgressPlugin(),
+        new Dotenv({
+            systemvars: true,
         }),
     ],
     experiments: {

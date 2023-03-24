@@ -8,7 +8,6 @@ import type { MapApi, DatasetCreationProps, AddDatasetOptions } from '@unfolded/
 interface FormProps {
     map: MapApi;
 }
-
 export const Form: React.FC<FormProps> = props => {
     const [prompt, setPrompt] = useState('SELECT * FROM city WHERE popRank < 2;');
 

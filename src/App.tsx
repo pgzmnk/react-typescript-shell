@@ -11,6 +11,7 @@ import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckd
 
 import { Shell } from './components/Shell';
 import { Map } from './components/Map';
+import { Inference } from './components/Inference';
 
 const DUCKDB_BUNDLES: duckdb.DuckDBBundles = {
     mvp: {
@@ -43,10 +44,6 @@ export class App extends React.Component<SomeComponentProps> {
         };
     }
 
-    //     React.useEffect(() => {
-    //     document.title = 'Quack';
-    // });
-
     render() {
         return (
             <div className="App">
@@ -55,6 +52,7 @@ export class App extends React.Component<SomeComponentProps> {
                     <DuckDBProvider>
                         <DuckDBConnectionProvider>
                             <Map />
+                            <Inference />
                             <Shell />
                         </DuckDBConnectionProvider>
                     </DuckDBProvider>
