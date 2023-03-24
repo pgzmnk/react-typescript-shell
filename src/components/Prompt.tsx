@@ -20,9 +20,5 @@ export const PromptDisplay = () => {
 export const PromptInput = () => {
     const { prompt, setPrompt } = React.useContext(PromptContext) as PromptContextType;
     const changeHandler = (event: React.FormEvent<HTMLInputElement>): void => setPrompt(event.currentTarget.value);
-    return (
-        <div>
-            <input type="text" value={prompt} onChange={changeHandler} />
-        </div>
-    );
+    return <input type="text" value={prompt} onChange={changeHandler} />;
 };
