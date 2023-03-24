@@ -5,6 +5,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createMap } from '@unfolded/map-sdk';
 import type { MapApi, DatasetCreationProps } from '@unfolded/map-sdk/';
+import { Box } from '@chakra-ui/react';
 import { Form } from './Form';
 
 import '../static/map.css';
@@ -114,7 +115,9 @@ export const Map = () => {
 
     return (
         <div className="">
-            <UnfoldedMap setMap={setMap} />
+            <Box w="100%" h="980px">
+                <UnfoldedMap setMap={setMap} />
+            </Box>
             <div className="sidemenu">
                 {!map ? (
                     <div id="loader" />
