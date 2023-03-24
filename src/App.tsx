@@ -27,7 +27,6 @@ export const App: React.FC<SomeComponentProps> = () => {
                     <DuckDBProvider>
                         <DuckDBConnectionProvider>
                             <PromptContext.Provider value={promptValue}>
-                                <div>test</div>
                                 <Map />
                                 <Shell />
                             </PromptContext.Provider>
