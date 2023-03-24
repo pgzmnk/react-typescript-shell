@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack, Button, Input } from '@chakra-ui/react';
 
 import * as rd from '@duckdb/react-duckdb';
 import arrow from 'apache-arrow';
@@ -96,19 +97,14 @@ export const Form: React.FC<FormProps> = props => {
     };
 
     return (
-        <div>
-            <div>
-                <button type="button" className="btn btn-secondary" onClick={handleClick}>
-                    Load
-                </button>
-                <button type="button" className="btn-btn-secondary" onClick={handleClickRender}>
-                    Render
-                </button>
-                <button type="button" className="btn-btn-secondary" onClick={handleClickAddDataset}>
-                    Add Dataset
-                </button>
-            </div>
-            <input
+        <Stack>
+            <Stack>
+                <Button onClick={handleClick}>Load</Button>
+                <Button onClick={handleClickRender}>Render</Button>
+                <Button onClick={handleClickAddDataset}>Add Dataset</Button>
+            </Stack>
+            <Input
+                variant="outline"
                 id="prompt"
                 type="text"
                 name="prompt"
@@ -116,6 +112,6 @@ export const Form: React.FC<FormProps> = props => {
                 onKeyDown={handleClickAddSqlDataset}
                 onChange={handleChange}
             />
-        </div>
+        </Stack>
     );
 };

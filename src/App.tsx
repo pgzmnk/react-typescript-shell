@@ -10,6 +10,7 @@ import { ShellSlide } from './components/ShellSlide';
 import { Shell } from './components/Shell';
 import { Map } from './components/Map';
 import { Inference } from './components/Inference';
+import { Form } from './components/Form';
 import { DUCKDB_BUNDLES } from './utils/duckdb_bundles';
 import { PromptContext, PromptDisplay, PromptInput } from './components/Prompt';
 
@@ -30,6 +31,9 @@ export const App: React.FC<SomeComponentProps> = () => {
                             <PromptContext.Provider value={promptValue}>
                                 <VStack divider={<StackDivider borderColor="gray.200" />} spacing={0} align="stretch">
                                     <Map />
+                                    <Form />
+                                    <PromptDisplay />
+                                    <PromptInput />
                                     <ShellSlide />
                                 </VStack>
                             </PromptContext.Provider>

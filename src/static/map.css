@@ -16,14 +16,15 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
   z-index: 0;
-  height: 800px !important;
   width: calc( 100% + 48px ) !important;
   margin-left: -48px;
 }
 .kepler-gl {
   margin-left: 0;
   position: absolute;
+  /* height: 100% !important; */
 
 }
 .side-nav {
