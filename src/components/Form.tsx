@@ -15,38 +15,33 @@ export const Form = () => {
 
     const { map } = React.useContext(MapContext) as MapContextType;
 
+    async function runQuery(query: string) {
+        let result: string = '';
+        try {
+            const c = await db!.value!.connect();
+            const response = await c.query(query);
+            result = response.toString();
+        } catch (error) {
+            console.log('error: ', error);
+        }
+        return result;
+    }
+
     const handleClick = async () => {
-        const c = await db!.value!.connect();
-        await c.query(`
+        await runQuery(`
             CREATE TABLE IF NOT EXISTS from_map AS
-                SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
+        SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
         `);
 
-        await c.query(
-            `CREATE TABLE IF NOT EXISTS city AS SELECT * FROM 'https://open-demo-datasets.s3.us-west-2.amazonaws.com/kepler/cities.csv';`,
+        await runQuery(
+            `CREATE TABLE IF NOT EXISTS city AS SELECT * FROM 'https://open-demo-datasets.s3.us-west-2.amazonaws.com/kepler/cities.csv'; `,
         );
-
-        await c.close();
     };
 
     const handlePromptChange = (event: { target: { value: React.SetStateAction<string> } }) => {
         console.log('handleChange...');
         setPrompt(event.target.value);
     };
-
-    async function runQuery(query: string) {
-        console.log('runQuery...', query);
-        let result: string = '';
-        try {
-            const c = await db!.value!.connect();
-            const response = await c.query(query);
-            result = response.toString();
-            console.log('result: ', result);
-        } catch (error) {
-            console.log('error: ', error);
-        }
-        return result;
-    }
 
     const handlePromptSubmission = async (event: any) => {
         // when user presses enter on the input field
@@ -64,7 +59,7 @@ export const Form = () => {
 
             switch (command) {
                 case 'create' || 'update':
-                    const queryString = `SELECT ${event.target.value.split(' AS SELECT')[1].trim()}`;
+                    const queryString = `SELECT ${event.target.value.split(' AS SELECT')[1].trim()} `;
 
                     const result = await runQuery(queryString);
 
@@ -79,7 +74,6 @@ export const Form = () => {
                     try {
                         map?.addDataset(datasetCreationProps, addDatasetOptions);
                     } catch (e) {
-                        console.log(e);
                         map?.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
                     }
 
