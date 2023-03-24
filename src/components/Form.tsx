@@ -28,12 +28,12 @@ export const Form = () => {
         await c.close();
     };
 
-    const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
+    const handlePromptChange = (event: { target: { value: React.SetStateAction<string> } }) => {
         console.log('handleChange...');
         setPrompt(event.target.value);
     };
 
-    const handleClickAddSqlDataset = async (event: any) => {
+    const handlePromptSubmission = async (event: any) => {
         // when user presses enter on the input field
         if (event.keyCode === 13) {
             const c = await db!.value!.connect();
@@ -75,8 +75,8 @@ export const Form = () => {
                 type="text"
                 name="prompt"
                 value={prompt}
-                onKeyDown={handleClickAddSqlDataset}
-                onChange={handleChange}
+                onKeyDown={handlePromptSubmission}
+                onChange={handlePromptChange}
             />
         </Stack>
     );
