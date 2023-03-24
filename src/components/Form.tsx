@@ -66,8 +66,8 @@ export const Form = () => {
     };
 
     const handleClickAddSqlDataset = async (event: any) => {
+        // when user presses enter on the input field
         if (event.keyCode === 13) {
-            console.log('PRESSED ENTER');
             const c = await db!.value!.connect();
             const result = await c.query(event.target.value);
             await c.close();
@@ -85,12 +85,10 @@ export const Form = () => {
 
             // create or replace dataset
             try {
-                console.log('added dataset');
                 map?.addDataset(datasetCreationProps, addDatasetOptions);
             } catch (e) {
                 console.log(e);
                 map?.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
-                console.log('updated dataset');
             }
         }
     };
