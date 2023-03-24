@@ -32,8 +32,18 @@ const UnfoldedMap = ({ setMap }) => {
     );
 };
 
+export type MapContextType = {
+    map: MapApi | null | undefined; // to-do: clean-up
+    setMap: React.Dispatch<React.SetStateAction<MapApi | undefined>>;
+};
+
+export const MapContext = React.createContext<MapContextType>({
+    map: null,
+    setMap: () => { },
+});
+
 export const Map = () => {
-    const [map, setMap] = useState<MapApi>();
+    const { map, setMap } = React.useContext(MapContext) as MapContextType;
 
     useEffect(() => {
         const dataset: DatasetCreationProps = {

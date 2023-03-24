@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { Stack, Button, Input } from '@chakra-ui/react';
+import { Stack, Button, Input, HStack } from '@chakra-ui/react';
 
 import * as rd from '@duckdb/react-duckdb';
 import arrow from 'apache-arrow';
 import type { MapApi, DatasetCreationProps, AddDatasetOptions } from '@unfolded/map-sdk/';
+import { Map, MapContext } from './Map';
+import type { MapContextType } from './Map';
 
-// constant takes in a map and returns a react component
-interface FormProps {
-    map: MapApi;
-}
-export const Form: React.FC<FormProps> = props => {
+export const Form = () => {
     const [prompt, setPrompt] = useState('SELECT * FROM city WHERE popRank < 2;');
 
     const db = rd.useDuckDB();
-    const { map } = props;
+
+    const { map } = React.useContext(MapContext) as MapContextType;
 
     const handleClick = async () => {
         const c = await db!.value!.connect();
@@ -87,10 +86,10 @@ export const Form: React.FC<FormProps> = props => {
             // create or replace dataset
             try {
                 console.log('added dataset');
-                map.addDataset(datasetCreationProps, addDatasetOptions);
+                map?.addDataset(datasetCreationProps, addDatasetOptions);
             } catch (e) {
                 console.log(e);
-                map.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
+                map?.replaceDataset(datasetCreationProps?.id as string, datasetCreationProps);
                 console.log('updated dataset');
             }
         }
@@ -98,11 +97,11 @@ export const Form: React.FC<FormProps> = props => {
 
     return (
         <Stack>
-            <Stack>
+            <HStack>
                 <Button onClick={handleClick}>Load</Button>
                 <Button onClick={handleClickRender}>Render</Button>
                 <Button onClick={handleClickAddDataset}>Add Dataset</Button>
-            </Stack>
+            </HStack>
             <Input
                 variant="outline"
                 id="prompt"
