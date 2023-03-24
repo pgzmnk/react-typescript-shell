@@ -9,15 +9,16 @@ export const Inference: React.FC<any> = () => {
             const configuration = new Configuration({
                 apiKey: process.env.OPENAI_API_KEY,
             });
-            const openai = new OpenAIApi(configuration);
-            const response = await openai.createCompletion({
-                model: 'text-davinci-003',
-                prompt: 'Say this is a test',
-                max_tokens: 7,
-                temperature: 0,
-            });
-            console.log(response);
-            console.log(response.data.choices[0].text);
+            // const openai = new OpenAIApi(configuration);
+            // const response = await openai.createCompletion({
+            //     model: 'text-davinci-003',
+            //     prompt: 'Say this is a test',
+            //     max_tokens: 7,
+            //     temperature: 0,
+            // });
+            console.log('placeholder openai response');
+            // console.log(response);
+            // console.log(response.data.choices[0].text);
         }
         fetchData();
     }, []); // Or [] if effect doesn't need props or state
