@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import React, { useState } from 'react';
 import { Stack, Button, Input, HStack } from '@chakra-ui/react';
 
@@ -8,7 +9,7 @@ import { Map, MapContext } from './Map';
 import type { MapContextType } from './Map';
 
 export const Form = () => {
-    const [prompt, setPrompt] = useState('SELECT * FROM city WHERE popRank < 2;');
+    const [prompt, setPrompt] = useState('CREATE DATASET city_dataset AS SELECT * FROM city WHERE popRank < 2;');
 
     const db = rd.useDuckDB();
 
@@ -38,8 +39,6 @@ export const Form = () => {
         if (event.keyCode === 13) {
             const command = event.target.value.split(' ')[0].toLowerCase() as string;
 
-            console.log('command!!', command);
-
             // switch for event.target.value values
             const tableName = event.target.value.match(/\b(FROM|JOIN)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
             const datasetName = event.target.value.match(/\b(DATASET)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
@@ -50,12 +49,13 @@ export const Form = () => {
             };
 
             switch (command) {
-                case 'create':
+                case 'create' || 'update':
                     const c = await db!.value!.connect();
-                    const result = await c.query(event.target.value);
+
+                    const queryString = `SELECT ${event.target.value.split(' AS SELECT')[1].trim()}`;
+                    const result = await c.query(queryString);
                     await c.close();
 
-                    // eslint-disable-next-line no-case-declarations
                     const datasetCreationProps: DatasetCreationProps = {
                         id: datasetName,
                         label: datasetName,
