@@ -6,7 +6,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createMap } from '@unfolded/map-sdk';
 import type { MapApi, DatasetCreationProps } from '@unfolded/map-sdk/';
 import { Box } from '@chakra-ui/react';
-import { Form } from './Form';
 
 import '../static/map.css';
 
@@ -35,8 +34,6 @@ const UnfoldedMap = ({ setMap }) => {
 
 export const Map = () => {
     const [map, setMap] = useState<MapApi>();
-    const [layers, setLayers] = useState<any[]>([]);
-    const [layerResult, setLayerResult] = useState<any>('');
 
     useEffect(() => {
         const dataset: DatasetCreationProps = {
@@ -51,107 +48,9 @@ export const Map = () => {
         // map && map.addDataset(dataset);
     }, [map]);
 
-    const loadLayers = () => {
-        const layers = map!.getLayers();
-        setLayerResult(JSON.stringify(layers, null, 2));
-        setLayers(layers);
-    };
-
-    const setLayerVisibilityForId = (id: any) => {
-        const index = layers.findIndex(layer => layer.id === id);
-        const layer = layers[index];
-        const layerId = layer.id;
-        const isVisible = !layer.isVisible;
-        layers[index] = map!.updateLayer(layerId, { isVisible });
-        const newLayers = [...layers];
-        setLayers(newLayers);
-    };
-
-    const goTo = (location: string) => {
-        let viewStateConfig = {
-            longitude: 0,
-            latitude: 0,
-            zoom: 0,
-        };
-        switch (location) {
-            case 'sf':
-                viewStateConfig = {
-                    longitude: -122.4194,
-                    latitude: 37.7749,
-                    zoom: 6,
-                };
-                break;
-            case 'la':
-                viewStateConfig = {
-                    longitude: -118.243683,
-                    latitude: 34.052235,
-                    zoom: 6,
-                };
-                break;
-            case 'ny':
-                viewStateConfig = {
-                    longitude: -73.935242,
-                    latitude: 40.73061,
-                    zoom: 6,
-                };
-                break;
-            case 'london':
-                viewStateConfig = {
-                    longitude: 0.1276,
-                    latitude: 51.5072,
-                    zoom: 6,
-                };
-                break;
-            default:
-                break;
-        }
-        _setViewState(viewStateConfig);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
-    const _setViewState = (config: { longitude: number; latitude: number; zoom: number }) => {
-        map!.setView(config);
-    };
-
     return (
-        <div className="">
-            <Box w="100%" h="980px">
-                <UnfoldedMap setMap={setMap} />
-            </Box>
-            <div className="sidemenu">
-                {!map ? (
-                    <div id="loader" />
-                ) : (
-                    <div id="content">
-                        <h2>GeoDuck</h2>
-                        <Form map={map} />
-                        <span className="subtitle">
-                            Built by{' '}
-                            <a href="https://www.geospatialml.com/" target="_blank" rel="noreferrer">
-                                GeospatialML
-                            </a>
-                        </span>
-                        <p className="description-small">Natural language geospatial analysis.</p>
-                        <div className="content-section">
-                            <span className="section-label">Viewport controls</span>
-                            <div className="location-container">
-                                <button id="move_button_sf" onClick={() => goTo('sf')}>
-                                    San Francisco
-                                </button>
-                                <button id="move_button_ny" onClick={() => goTo('ny')}>
-                                    New York
-                                </button>
-                                <button id="move_button_la" onClick={() => goTo('la')}>
-                                    Los Angeles
-                                </button>
-                                <button id="move_button_london" onClick={() => goTo('london')}>
-                                    London
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-        </div>
+        <Box w="100%" h="980px">
+            <UnfoldedMap setMap={setMap} />
+        </Box>
     );
 };
