@@ -7,13 +7,10 @@ import * as duckdb from '@duckdb/duckdb-wasm';
 import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckdb/react-duckdb';
 
 import type { MapApi } from '@unfolded/map-sdk/';
-import { ShellSlide } from './components/ShellSlide';
-import { Shell } from './components/Shell';
-import { Map, MapContext } from './components/Map';
-import { Inference } from './components/Inference';
-import { Form } from './components/Form';
+import { MapContext } from './components/Map';
 import { DUCKDB_BUNDLES } from './utils/duckdb_bundles';
 import { PromptContext, PromptDisplay, PromptInput } from './components/Prompt';
+import { MapEditor } from './components/MapEditor';
 
 const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
 
@@ -38,11 +35,8 @@ export const App: React.FC<SomeComponentProps> = () => {
                                         spacing={0}
                                         align="stretch"
                                     >
-                                        <Map />
-                                        <Form />
-                                        <PromptDisplay />
-                                        <PromptInput />
-                                        <ShellSlide />
+                                        <p>header</p>
+                                        <MapEditor />
                                     </VStack>
                                 </PromptContext.Provider>
                             </MapContext.Provider>
