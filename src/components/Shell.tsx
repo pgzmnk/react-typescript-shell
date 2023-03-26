@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as duckdb from '@duckdb/duckdb-wasm';
 import * as shell from '@duckdb/duckdb-wasm-shell';
 import * as rd from '@duckdb/react-duckdb';
@@ -11,12 +12,7 @@ import shell_wasm from '@duckdb/duckdb-wasm-shell/dist/shell_bg.wasm';
 
 const SHELL_FONT_FAMILY = 'Roboto Mono';
 
-interface ShellProps {
-    height?: number;
-    backgroundColor?: string;
-    padding?: number[];
-    borderRadius?: number[];
-}
+interface ShellProps { }
 
 export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
     const termContainer = React.useRef<HTMLDivElement | null>(null);
@@ -34,6 +30,7 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
 
     // Embed the shell into the term container
     React.useEffect(() => {
+        // eslint-disable-next-line no-console
         console.assert(termContainer.current != null);
         (async () => {
             const regular = new FontFaceObserver(SHELL_FONT_FAMILY).load();

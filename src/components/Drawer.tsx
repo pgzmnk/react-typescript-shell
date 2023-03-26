@@ -1,5 +1,5 @@
-import { HamburgerIcon, ArrowLeftIcon } from '@chakra-ui/icons';
-import { Box, Button, HStack, VStack, Flex } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { Button, HStack, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Shell } from './Shell';
 import { Form } from './Form';
@@ -9,19 +9,6 @@ interface Props {
     setCollapsed: (collapsed: boolean) => void;
     minWidth: number;
 }
-interface Tab {
-    id: string;
-    component: (props: any) => any;
-    icon: React.FC;
-}
-
-const tabs: Tab[] = [
-    {
-        id: 'shell',
-        component: Shell,
-        icon: HamburgerIcon,
-    },
-];
 
 export const Drawer = ({ collapsed, setCollapsed, minWidth }: Props) => {
     const handleToggleCollapse = () => {
@@ -36,7 +23,6 @@ export const Drawer = ({ collapsed, setCollapsed, minWidth }: Props) => {
             flex="2"
             width="100%"
             display="block"
-            // overflowY="scroll"
             overflowY="clip"
             flexDirection="column"
             alignItems="center"

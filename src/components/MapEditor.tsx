@@ -1,13 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Allotment, AllotmentHandle } from 'allotment';
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import 'allotment/dist/style.css';
 
-// import { ShellSlide } from './components/ShellSlide';
-// import { Shell } from './components/Shell';
 import { Map } from './Map';
-// import { Inference } from './components/Inference';
-// import { Form } from './components/Form';
 import { Drawer } from './Drawer';
 
 const MIN_WIDTH = 100;

@@ -1,11 +1,10 @@
 /* eslint-disable no-case-declarations */
 import React, { useState } from 'react';
-import { Stack, Button, Input, HStack } from '@chakra-ui/react';
+import { Button, Input, HStack } from '@chakra-ui/react';
 
 import * as rd from '@duckdb/react-duckdb';
-import arrow from 'apache-arrow';
-import type { MapApi, DatasetCreationProps, AddDatasetOptions } from '@unfolded/map-sdk/';
-import { Map, MapContext } from './Map';
+import type { DatasetCreationProps, AddDatasetOptions } from '@unfolded/map-sdk/';
+import { MapContext } from './Map';
 import type { MapContextType } from './Map';
 
 import datasets from '../data/remote_datasets.json';
@@ -51,7 +50,6 @@ export const Form = () => {
             const command = event.target.value.split(' ')[0].toLowerCase() as string;
 
             // extract prompt fields
-            const tableName = event.target.value.match(/\b(FROM|JOIN)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
             const datasetName = event.target.value.match(/\b(DATASET)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
 
             const addDatasetOptions: AddDatasetOptions = {

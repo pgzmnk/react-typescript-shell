@@ -9,7 +9,7 @@ import { DuckDBConnectionProvider, DuckDBPlatform, DuckDBProvider } from '@duckd
 import type { MapApi } from '@unfolded/map-sdk/';
 import { MapContext } from './components/Map';
 import { DUCKDB_BUNDLES } from './utils/duckdb_bundles';
-import { PromptContext, PromptDisplay, PromptInput } from './components/Prompt';
+import { PromptContext } from './components/Prompt';
 import { MapEditor } from './components/MapEditor';
 
 const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
