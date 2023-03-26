@@ -23,30 +23,14 @@ export const MapEditor = () => {
 
     return (
         <Box height="100vh" flex="1" width="100%">
-            <div>
-                <Button
-                    onClick={() => {
-                        allotmentRef.current.reset();
-                    }}
-                >
-                    Reset
-                </Button>
-                <Button
-                    onClick={() => {
-                        allotmentRef.current.resize([100, 200]);
-                    }}
-                >
-                    Resize
-                </Button>
-            </div>
             <Box height="100vh">
-                <Allotment ref={allotmentRef}>
-                    <Allotment.Pane minSize={600} visible>
-                        <p>AAA</p>
-                        <Map />
+                <Allotment ref={allotmentRef} vertical>
+                    <Allotment.Pane minSize={200} visible>
+                        <Box height="calc(100vh - MIN_WIDTH)" width="100%">
+                            <Map />
+                        </Box>
                     </Allotment.Pane>
-                    <Allotment.Pane minSize={MIN_WIDTH} snap visible>
-                        <p>BBB</p>
+                    <Allotment.Pane minSize={MIN_WIDTH} visible>
                         <Drawer
                             collapsed={collapsed}
                             setCollapsed={(newCollapsed: boolean) => {

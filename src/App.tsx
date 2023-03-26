@@ -35,7 +35,6 @@ export const App: React.FC<SomeComponentProps> = () => {
                                         spacing={0}
                                         align="stretch"
                                     >
-                                        <p>header</p>
                                         <MapEditor />
                                     </VStack>
                                 </PromptContext.Provider>

@@ -3,6 +3,7 @@ import * as shell from '@duckdb/duckdb-wasm-shell';
 import * as rd from '@duckdb/react-duckdb';
 import React from 'react';
 import FontFaceObserver from 'fontfaceobserver';
+import { Box } from '@chakra-ui/react';
 
 import '../static/shell.css';
 
@@ -11,12 +12,14 @@ import shell_wasm from '@duckdb/duckdb-wasm-shell/dist/shell_bg.wasm';
 const SHELL_FONT_FAMILY = 'Roboto Mono';
 
 interface ShellProps {
+    height?: number;
     backgroundColor?: string;
     padding?: number[];
     borderRadius?: number[];
 }
 
 export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
+    const { height } = props;
     const termContainer = React.useRef<HTMLDivElement | null>(null);
     const db = rd.useDuckDB();
     const resolveDB = rd.useDuckDBResolver();
@@ -81,8 +84,8 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
     }, [db]);
 
     return (
-        <div className="shell_container">
+        <Box width="100%" height={height}>
             <div ref={termContainer} className="term_container" />
-        </div>
+        </Box>
     );
 };

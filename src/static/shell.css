@@ -4,18 +4,6 @@
     font-family: 'Nunito';
 }
 
-.shell_container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0fb04a;
-    color: #fd0fbe;
-    margin: 0px 0px 0px 0px;
-}
-
 .btn-primary {
     background-color: hsl(56deg 100% 35%) !important;
     border-color: hsl(56deg 100% 35%) !important;
@@ -49,9 +37,10 @@
     /* padding-left: 10%; */
 }
 
-.xterm .xterm-viewport .xterm-screen {
+.xterm .xterm-viewport .xterm-screen .xterm-cursor-layer {
+    height: 100% !important;
+
     /* max-height: 20vh; */
-    height: 100%;
 
 }
 
@@ -94,10 +83,10 @@
 .term_container {
     width: 100%;
     height: 100%;
-    max-height: 30vh;
+    /* max-height: 30vh; */
     overflow-y: scroll;
     padding: 0px 0 0 0px;
     margin: 0px 0px 0px 0px;
-    background-color: #f90404;
+    background-color: #04f9c0;
 }
 
