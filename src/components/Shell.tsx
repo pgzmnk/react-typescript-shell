@@ -83,7 +83,7 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
     }, [db]);
 
     return (
-        <Box width="100%">
+        <Box width="100%" height="100%">
             <div ref={termContainer} className="term_container" />
         </Box>
     );

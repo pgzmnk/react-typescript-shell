@@ -97,6 +97,8 @@ export const Form = () => {
         <HStack>
             <Input
                 variant="outline"
+                htmlSize={10}
+                width="auto"
                 id="prompt"
                 type="text"
                 name="prompt"
