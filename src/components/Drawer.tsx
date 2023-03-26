@@ -29,8 +29,29 @@ export const Drawer = ({ collapsed, setCollapsed, minWidth }: Props) => {
     };
 
     return (
-        <VStack height="100%" min-height={minWidth} spacing={2} flex="2" width="100%">
-            <HStack height="80px" minHeight="80px" width="100%" justify="right">
+        <VStack
+            height="100%"
+            min-height={minWidth}
+            spacing={2}
+            flex="2"
+            width="100%"
+            display="block"
+            // overflowY="scroll"
+            overflowY="clip"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="flex-start"
+        >
+            <HStack
+                height={minWidth}
+                minHeight={minWidth}
+                width="100%"
+                justify="right"
+                padding={5}
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="flex-start"
+            >
                 <Form />
                 <Button onClick={handleToggleCollapse} colorScheme="teal" variant="outline">
                     Shell

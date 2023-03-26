@@ -10,7 +10,7 @@ import { Map } from './Map';
 // import { Form } from './components/Form';
 import { Drawer } from './Drawer';
 
-const MIN_WIDTH = 60;
+const MIN_WIDTH = 100;
 
 export const MapEditor = () => {
     // drawer logic

@@ -94,11 +94,11 @@ export const Form = () => {
     };
 
     return (
-        <HStack>
+        <HStack width="100%">
             <Input
                 variant="outline"
-                htmlSize={10}
-                width="auto"
+                htmlSize={4}
+                width="100%"
                 id="prompt"
                 type="text"
                 name="prompt"
