@@ -5,6 +5,7 @@ import 'allotment/dist/style.css';
 
 import { Map } from './Map';
 import { Drawer } from './Drawer';
+import { DemoModal } from './DemoModal';
 
 const MIN_WIDTH = 100;
 
@@ -25,6 +26,7 @@ export const MapEditor = () => {
                         <Box height="calc(100vh - MIN_WIDTH)" width="100%">
                             <Map />
                         </Box>
+                        <DemoModal />
                     </Allotment.Pane>
                     <Allotment.Pane minSize={MIN_WIDTH} visible>
                         <Drawer
