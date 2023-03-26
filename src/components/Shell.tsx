@@ -80,13 +80,8 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
         }
     }, [db]);
 
-    const style: React.CSSProperties = {
-        padding: props.padding ? `${props.padding.map(p => `${p}px`).join(' ')}` : '0px',
-        borderRadius: props.borderRadius ? `${props.borderRadius.map(p => `${p}px`).join(' ')}` : '0px',
-        backgroundColor: props.backgroundColor || 'transparent',
-    };
     return (
-        <div className="root" style={style}>
+        <div className="shell_container">
             <div ref={termContainer} className="term_container" />
         </div>
     );

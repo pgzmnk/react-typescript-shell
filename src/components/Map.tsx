@@ -1,35 +1,66 @@
-import React from 'react';
-import * as rd from '@duckdb/react-duckdb';
-import arrow from 'apache-arrow';
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/button-has-type */
+import React, { useState, useRef, useEffect } from 'react';
+import { createMap } from '@unfolded/map-sdk';
+import type { MapApi, DatasetCreationProps } from '@unfolded/map-sdk/';
+import { Box } from '@chakra-ui/react';
 
-export const Map: React.FC = () => {
-    const db = rd.useDuckDB();
+import '../static/map.css';
 
-    const handleClick = async () => {
-        const c = await db!.value!.connect();
-        await c.query(`
-            CREATE TABLE from_map AS
-                SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
-        `);
-        await c.close();
-    };
+const locationData = require('../data/cities.json');
 
-    const handleClickRender = async () => {
-        const c = await db!.value!.connect();
-        const result = await c.query<{ v: arrow.Int }>('SELECT * FROM from_map LIMIT 4;');
-        console.log(result.toString());
-        await c.close();
-    };
+// @ts-expect-error
+const UnfoldedMap = ({ setMap }) => {
+    const mountContainerRef = useRef(null);
+
+    useEffect(() => {
+        const loadMap = async () => {
+            const mapInstance = await createMap({});
+
+            setMap(mapInstance);
+            mapInstance.addToDOM(mountContainerRef?.current!);
+        };
+        loadMap();
+    }, [setMap]);
 
     return (
-        <div>
-            <h1>Data functions:</h1>
-            <button className="btn btn-secondary" onClick={handleClick}>
-                Load
-            </button>
-            <button className="btn-btn-secondary" onClick={handleClickRender}>
-                Render
-            </button>
+        <div className="unfolded">
+            <div ref={mountContainerRef} />
         </div>
+    );
+};
+
+export type MapContextType = {
+    map: MapApi | null | undefined; // to-do: clean-up
+    setMap: React.Dispatch<React.SetStateAction<MapApi | undefined>>;
+};
+
+export const MapContext = React.createContext<MapContextType>({
+    map: null,
+    setMap: () => { },
+});
+
+export const Map = () => {
+    const { map, setMap } = React.useContext(MapContext) as MapContextType;
+
+    useEffect(() => {
+        const dataset: DatasetCreationProps = {
+            id: 'test-dataset-01',
+            label: 'Cities',
+            color: [194, 29, 29],
+            data: locationData,
+        };
+
+        // disable pre-loading datasets for now
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        // map && map.addDataset(dataset);
+    }, [map]);
+
+    return (
+        <Box w="100%" h="980px">
+            <UnfoldedMap setMap={setMap} />
+        </Box>
     );
 };

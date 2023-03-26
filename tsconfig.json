@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "outDir": "./build/ts/",
-        "target": "es5",
+        "target": "es6",
         "jsx": "react-jsx",
         "module": "es2020",
         "moduleResolution": "node",
@@ -18,7 +18,8 @@
         "lib": ["es6", "es2020", "dom"],
         "paths": {
             "@/*": ["src/*"]
-        }
+        },
+        "suppressImplicitAnyIndexErrors": true
     },
     "exclude": ["./node_modules_j"],
     "include": ["./src/**/*", "./test/**/*", "./types/*.d.ts", "**/*.tsx", "**/*.js", "**/*.ts", "/node_modules/"],

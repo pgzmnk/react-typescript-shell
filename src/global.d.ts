@@ -3,7 +3,7 @@ declare module '*.wasm' {
     export default value;
 }
 
-declare module '*.module.css' {
+declare module '*.scss' {
     const value: any;
     export default value;
 }

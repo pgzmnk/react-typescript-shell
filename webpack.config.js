@@ -1,11 +1,15 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import Dotenv from 'dotenv-webpack';
+import webpack from 'webpack';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
     target: 'web',
+    // externalsPresets: { node: true },
     mode: 'production',
     entry: {
         // app: ["./src/app.tsx"],
@@ -27,7 +31,7 @@ export default {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                options: { allowTsInNodeModules: true } // also introduced this to mitigate errors
+                options: { allowTsInNodeModules: true }, // also introduced this to mitigate errors
                 // exclude: /node_modules/, // commenting this vanishes the "unexpected token" error in node_modules
             },
             {
@@ -42,7 +46,7 @@ export default {
                 type: 'asset/resource',
             },
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     'style-loader',
                     {
@@ -64,6 +68,10 @@ export default {
         new HtmlWebpackPlugin({
             template: './templates/index.html',
             // filename: "./index.html",
+        }),
+        new webpack.ProgressPlugin(),
+        new Dotenv({
+            systemvars: true,
         }),
     ],
     experiments: {
