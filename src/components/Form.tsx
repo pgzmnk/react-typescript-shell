@@ -8,6 +8,8 @@ import type { MapApi, DatasetCreationProps, AddDatasetOptions } from '@unfolded/
 import { Map, MapContext } from './Map';
 import type { MapContextType } from './Map';
 
+import datasets from '../data/remote_datasets.json';
+
 export const Form = () => {
     const [prompt, setPrompt] = useState('CREATE DATASET city_dataset AS SELECT * FROM city WHERE popRank < 2;');
 
@@ -28,13 +30,13 @@ export const Form = () => {
     }
 
     const handleClick = async () => {
-        await runQuery(`
-            CREATE TABLE IF NOT EXISTS from_map AS
-        SELECT * FROM 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' LIMIT 10;
-        `);
+        Object.entries(datasets).forEach(async dataset => {
+            const [key, value] = dataset;
+            await runQuery(`CREATE TABLE IF NOT EXISTS ${key} AS SELECT * FROM '${value}'; `);
+        });
 
         await runQuery(
-            `CREATE TABLE IF NOT EXISTS city AS SELECT * FROM 'https://open-demo-datasets.s3.us-west-2.amazonaws.com/kepler/cities.csv'; `,
+            `CREATE TABLE IF NOT EXISTS demo_city AS SELECT * FROM 'https://open-demo-datasets.s3.us-west-2.amazonaws.com/kepler/cities.csv'; `,
         );
     };
 
