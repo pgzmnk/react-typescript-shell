@@ -94,10 +94,7 @@ export const Form = () => {
     };
 
     return (
-        <Stack>
-            <HStack>
-                <Button onClick={handleClick}>Load</Button>
-            </HStack>
+        <HStack>
             <Input
                 variant="outline"
                 id="prompt"
@@ -107,6 +104,7 @@ export const Form = () => {
                 onKeyDown={handlePromptSubmission}
                 onChange={handlePromptChange}
             />
-        </Stack>
+            <Button onClick={handleClick}>Load</Button>
+        </HStack>
     );
 };

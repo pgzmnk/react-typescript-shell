@@ -19,7 +19,6 @@ interface ShellProps {
 }
 
 export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
-    const { height } = props;
     const termContainer = React.useRef<HTMLDivElement | null>(null);
     const db = rd.useDuckDB();
     const resolveDB = rd.useDuckDBResolver();
@@ -84,7 +83,7 @@ export const Shell: React.FC<ShellProps> = (props: ShellProps) => {
     }, [db]);
 
     return (
-        <Box width="100%" height={height}>
+        <Box width="100%">
             <div ref={termContainer} className="term_container" />
         </Box>
     );

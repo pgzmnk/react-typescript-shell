@@ -24,7 +24,7 @@ export const MapEditor = () => {
     return (
         <Box height="100vh" flex="1" width="100%">
             <Box height="100vh">
-                <Allotment ref={allotmentRef} vertical>
+                <Allotment ref={allotmentRef} onChange={onWidthChange} vertical>
                     <Allotment.Pane minSize={200} visible>
                         <Box height="calc(100vh - MIN_WIDTH)" width="100%">
                             <Map />
