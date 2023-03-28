@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Input, HStack } from '@chakra-ui/react';
 
 import type { DatasetCreationProps, AddDatasetOptions } from '@unfolded/map-sdk/';
+import * as rd from '@duckdb/react-duckdb';
 import { MapContext } from './Map';
 import type { MapContextType } from './Map';
 import { runQueryDuckDb } from '../api/runQueryDuckDb';
@@ -11,6 +12,7 @@ export const Form = () => {
     const [prompt, setPrompt] = useState('CREATE DATASET city_dataset AS SELECT * FROM city WHERE popRank < 2;');
 
     const { map } = React.useContext(MapContext) as MapContextType;
+    const db = rd.useDuckDB();
 
     const handlePromptChange = (event: { target: { value: React.SetStateAction<string> } }) => {
         console.log('handleChange...');
@@ -34,7 +36,7 @@ export const Form = () => {
                 case 'create' || 'update':
                     const queryString = `SELECT ${event.target.value.split(' AS SELECT')[1].trim()} `;
 
-                    const result = await runQueryDuckDb(queryString);
+                    const result = await runQueryDuckDb(db, queryString);
 
                     const datasetCreationProps: DatasetCreationProps = {
                         id: datasetName,

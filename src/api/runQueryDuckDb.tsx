@@ -1,7 +1,4 @@
-import * as rd from '@duckdb/react-duckdb';
-
-export async function runQueryDuckDb(query: string) {
-    const db = rd.useDuckDB();
+export async function runQueryDuckDb(db: any, query: string) {
     let result: string = '';
     try {
         const c = await db!.value!.connect();
