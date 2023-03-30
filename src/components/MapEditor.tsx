@@ -28,9 +28,9 @@ export const MapEditor = () => {
                         <Box height="calc(100vh - MIN_WIDTH)" width="100%" position="relative">
                             <Map />
                             <HStack spacing="24px" top="5" right="100" position="absolute">
-                                <Box>
+                                {/* <Box>
                                     <DemoModal />
-                                </Box>
+                                </Box> */}
                                 <Box>
                                     <SelectDisplayMap displayMap={displayMap} setDisplayMap={setDisplayMap} />
                                 </Box>
