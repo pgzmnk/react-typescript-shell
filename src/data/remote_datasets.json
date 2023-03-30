@@ -1,5 +1,6 @@
 {
     "ent": "https://open-demo-datasets.s3.us-west-2.amazonaws.com/inegi/00ent_epsg4326.parquet",
     "mun": "https://open-demo-datasets.s3.us-west-2.amazonaws.com/inegi/00mun_epsg4326.parquet",
-    "ageb": "https://open-demo-datasets.s3.us-west-2.amazonaws.com/inegi/00a_epsg4326.parquet"
+    "ageb": "https://open-demo-datasets.s3.us-west-2.amazonaws.com/inegi/00a_epsg4326.parquet",
+    "cpv_geo_ageb": "https://open-demo-datasets.s3.us-west-2.amazonaws.com/inegi/cpv_2020/geo_cpv_00_routerjoin.parquet"
 }

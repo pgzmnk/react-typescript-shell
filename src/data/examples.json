@@ -1,0 +1,11 @@
+{
+    "wealth": {
+        "prompt": "Where are the wealthiest people?"
+    },
+    "gender": {
+        "prompt": "Which census blocks have the largest difference in population between genders?"
+    },
+    "age": {
+        "prompt": "Which zip codes have the most old people and children?"
+    }
+}

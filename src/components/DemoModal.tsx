@@ -22,8 +22,8 @@ import { LoadDataButton } from './LoadDataButton';
 export const DemoModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <Box height="100vh" flex="1" width="100%">
-            <Button onClick={onOpen} position="fixed" top="5" right="20" colorScheme="blue" size="lg">
+        <Box>
+            <Button onClick={onOpen} colorScheme="blue" size="lg">
                 Try Demo
             </Button>
 
