@@ -17,7 +17,7 @@ import { runQueryDuckDb } from '../api/runQueryDuckDb';
 
 export const Form = () => {
     const [prompt, setPrompt] = useState(
-        'CREATE DATASET cpv_geo_ageb AS SELECT geometry_str, prom_hnv FROM cpv_geo_ageb WHERE cve_ent=1;',
+        'CREATE DATASET cpv_geo_ageb AS SELECT PROM_HNV, geometry_str FROM cpv_geo_ageb WHERE cve_ent=1;',
     );
 
     const { map } = React.useContext(MapContext) as MapContextType;
@@ -34,6 +34,7 @@ export const Form = () => {
             const command = event.target.value.split(' ')[0].toLowerCase() as string;
 
             // extract prompt fields
+            const firstFieldName = event.target.value.match(/\b(SELECT)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
             const datasetName = event.target.value.match(/\b(DATASET)\s+\`?(\w+)\`?/g)?.[0].split(' ')[1];
 
             const addDatasetOptions: AddDatasetOptions = {
@@ -62,17 +63,18 @@ export const Form = () => {
                     }
 
                     // try to create layer
+                    const layerId = 'test-layer-01';
                     const layerCreationProps: LayerCreationProps = {
-                        id: 'test-layer-01',
+                        id: layerId,
                         type: 'geojson' as LayerType,
                         dataId: datasetName,
                         label: 'New Layer',
                         isVisible: true,
-                        fields: { geojson: 'geometry_str', PROM_HNV: 'PROM_HNV' },
+                        fields: { geojson: 'geometry_str' },
                         config: {
                             visualChannels: {
                                 colorField: {
-                                    name: 'PROM_HNV',
+                                    name: firstFieldName,
                                     type: 'real',
                                 },
                                 colorScale: 'quantile',
@@ -122,10 +124,9 @@ export const Form = () => {
                     console.log('layerCreationProps', layerCreationProps);
                     try {
                         map?.addLayer(layerCreationProps);
-                        console.log('layer added');
                     } catch (e) {
-                        console.log('error creating layer');
                         console.log(e);
+                        map?.updateLayer(layerId, layerCreationProps);
                     }
 
                     break;
