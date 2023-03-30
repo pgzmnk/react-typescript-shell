@@ -7,5 +7,9 @@
     },
     "age": {
         "prompt": "Which zip codes have the most old people and children?"
+    },
+    "fertility": {
+        "prompt": "What's the fertility rate of each census block in Mexico City?",
+        "query": "CREATE DATASET fertility_dataset AS SELECT prom_hnv, geometry_str FROM cpv_geo_ageb WHERE cve_zm=09.01;"
     }
 }
