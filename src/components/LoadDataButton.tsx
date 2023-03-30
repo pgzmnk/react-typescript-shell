@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
-import React, { useState } from 'react';
-import { Button, Input, HStack } from '@chakra-ui/react';
+import React from 'react';
+import { Button, HStack } from '@chakra-ui/react';
 
 import * as rd from '@duckdb/react-duckdb';
 import { MapContext } from './Map';
@@ -10,7 +10,6 @@ import { runQueryDuckDb } from '../api/runQueryDuckDb';
 import datasets from '../data/remote_datasets.json';
 
 export const LoadDataButton = () => {
-    const { map } = React.useContext(MapContext) as MapContextType;
     const db = rd.useDuckDB();
 
     const handleClick = async () => {

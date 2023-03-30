@@ -1,8 +1,13 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
 import { Button, HStack, VStack } from '@chakra-ui/react';
 import React from 'react';
+import * as rd from '@duckdb/react-duckdb';
 import { Shell } from './Shell';
 import { Form } from './Form';
+
+import { runQueryDuckDb } from '../api/runQueryDuckDb';
+import datasets from '../data/remote_datasets.json';
+
+const INITIAL_DATASETS = ['cpv_geo_ageb'];
 
 interface Props {
     collapsed: boolean;
@@ -14,6 +19,19 @@ export const Drawer = ({ collapsed, setCollapsed, minWidth }: Props) => {
     const handleToggleCollapse = () => {
         setCollapsed(!collapsed);
     };
+    const db = rd.useDuckDB();
+
+    React.useEffect(() => {
+        async function preloadData() {
+            Object.entries(datasets).forEach(async dataset => {
+                const [key, value] = dataset;
+                if (INITIAL_DATASETS.includes(key)) {
+                    await runQueryDuckDb(db, `CREATE TABLE IF NOT EXISTS ${key} AS SELECT * FROM '${value}'; `);
+                }
+            });
+        }
+        preloadData();
+    });
 
     return (
         <VStack

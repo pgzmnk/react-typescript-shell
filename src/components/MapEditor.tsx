@@ -13,7 +13,7 @@ const MIN_WIDTH = 100;
 export const MapEditor = () => {
     // drawer logic
     const allotmentRef = useRef<AllotmentHandle>(null!);
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const onWidthChange = useCallback(
         (newWidths: number[]) => setCollapsed(newWidths[1] === MIN_WIDTH),
         [setCollapsed],
@@ -25,17 +25,17 @@ export const MapEditor = () => {
             <Box height="100vh">
                 <Allotment ref={allotmentRef} onChange={onWidthChange} vertical>
                     <Allotment.Pane minSize={200} visible>
-                        <Box height="calc(100vh - MIN_WIDTH)" width="100%">
+                        <Box height="calc(100vh - MIN_WIDTH)" width="100%" position="relative">
                             <Map />
+                            <HStack spacing="24px" top="5" right="100" position="absolute">
+                                <Box>
+                                    <DemoModal />
+                                </Box>
+                                <Box>
+                                    <SelectDisplayMap displayMap={displayMap} setDisplayMap={setDisplayMap} />
+                                </Box>
+                            </HStack>
                         </Box>
-                        <HStack spacing="24px" position="fixed" top="5" right="50%">
-                            <Box>
-                                <DemoModal />
-                            </Box>
-                            <Box>
-                                <SelectDisplayMap displayMap={displayMap} setDisplayMap={setDisplayMap} />
-                            </Box>
-                        </HStack>
                     </Allotment.Pane>
                     <Allotment.Pane minSize={MIN_WIDTH} visible>
                         <Drawer
